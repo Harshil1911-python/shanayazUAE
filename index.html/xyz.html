@@ -1,0 +1,90 @@
+# Redefine base path and create necessary folders again due to kernel reset
+import os
+from zipfile import ZipFile
+
+base_path = "/mnt/data/shanayaz_handicraft"
+os.makedirs(base_path, exist_ok=True)
+os.makedirs(f"{base_path}/images", exist_ok=True)
+
+# Create placeholder images
+image_files = ["banner.jpg", "chaniya.jpg", "pottery.jpg"]
+for img in image_files:
+    open(f"{base_path}/images/{img}", "wb").close()
+
+# Add HTML and JS files
+files = {
+    "index.html": """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shanayaz Handicraft</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="language-toggle">
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('hi')">हिंदी</button>
+  </div>
+
+  <header class="hero">
+    <div class="overlay"></div>
+    <h1 data-en="Shanayaz Handicraft" data-hi="शनायाज़ हैंडीक्राफ्ट">Shanayaz Handicraft</h1>
+    <p data-en="Indian Treasures for the World" data-hi="विश्व के लिए भारतीय खजाना">Indian Treasures for the World</p>
+  </header>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <section class="gallery fade-in">
+    <h2 data-en="Gallery" data-hi="गेलरी">Gallery</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="images/chaniya.jpg" alt="Chaniya Choli" />
+        <p data-en="Chaniya Choli" data-hi="चणिया चोली">Chaniya Choli</p>
+        <a href="contact.html" class="buy-btn" data-en="Buy Now" data-hi="खरीदें">Buy Now</a>
+      </div>
+      <div class="gallery-item">
+        <img src="images/pottery.jpg" alt="Pottery" />
+        <p data-en="Handcrafted Pottery" data-hi="हस्तनिर्मित मिट्टी के बर्तन">Handcrafted Pottery</p>
+        <a href="contact.html" class="buy-btn" data-en="Buy Now" data-hi="खरीदें">Buy Now</a>
+      </div>
+    </div>
+  </section>
+
+  <a href="https://wa.me/918777644143" class="whatsapp-float" target="_blank">💬 Chat with us</a>
+
+  <footer>
+    <p>© 2025 Shanayaz Handicraft</p>
+  </footer>
+</body>
+</html>
+""",
+    "script.js": """function setLanguage(lang) {
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerText = el.getAttribute(`data-${lang}`);
+  });
+}
+"""
+}
+
+# Write files
+for name, content in files.items():
+    with open(f"{base_path}/{name}", "w") as f:
+        f.write(content)
+
+# Create final zip file
+zip_path = "/mnt/data/shanayaz_handicraft_website.zip"
+with ZipFile(zip_path, "w") as zipf:
+    for root, _, filenames in os.walk(base_path):
+        for file in filenames:
+            full_path = os.path.join(root, file)
+            arcname = os.path.relpath(full_path, base_path)
+            zipf.write(full_path, arcname)
+
+zip_path

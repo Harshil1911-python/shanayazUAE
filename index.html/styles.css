@@ -1,0 +1,162 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fdf6e3;
+  color: #3e2f1c;
+  scroll-behavior: smooth;
+  perspective: 1000px;
+}
+
+.hero {
+  background: url('images/banner.jpg') center/cover no-repeat;
+  height: 80vh;
+  color: #fff8dc;
+  text-align: center;
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero .overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.hero h1, .hero p {
+  z-index: 1;
+  position: relative;
+  animation: fadeInDown 1s ease forwards;
+}
+
+.hero h1 {
+  font-size: 4em;
+  color: #FFD700;
+}
+
+.hero p {
+  font-size: 1.5em;
+  color: #f9e8b3;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  background: #FFD700;
+  padding: 1em;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 10;
+  transition: background-color 0.3s ease;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #A41E34;
+  font-family: 'Playfair Display', serif;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #6e121f;
+}
+
+.intro, .gallery, .portfolio, .contact-form {
+  padding: 4em 2em;
+  text-align: center;
+}
+
+.gallery-grid, .portfolio-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  flex-wrap: wrap;
+}
+
+.gallery-item, .portfolio-card {
+  background-color: #fffdf4;
+  border: 2px solid #FFD700;
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+  padding: 1em;
+  width: 300px;
+  transform: rotateY(0);
+  transition: transform 0.5s, box-shadow 0.3s ease;
+}
+
+.gallery-item:hover, .portfolio-card:hover {
+  transform: rotateY(5deg) scale(1.03);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.25);
+}
+
+.gallery-item img, .portfolio-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.contact-form input, .contact-form textarea {
+  padding: 1em;
+  border-radius: 5px;
+  border: 1px solid #FFD700;
+  background-color: #fffef8;
+}
+
+.contact-form button {
+  padding: 1em;
+  background-color: #A41E34;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #7f1526;
+}
+
+footer {
+  background-color: #A41E34;
+  color: #fff8dc;
+  text-align: center;
+  padding: 1em 0;
+  font-size: 0.9em;
+}
+
+/* === Animations === */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+.fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
